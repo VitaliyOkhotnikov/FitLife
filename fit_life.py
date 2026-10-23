@@ -1,5 +1,7 @@
 """Проект FitLife - MVP версия 1.0"""
 
+import datetime
+
 WATER_PER_KG = 30
 ML_TO_LITRES = 1000
 
@@ -41,9 +43,17 @@ bmi = user_weight / (user_height ** 2)  # Рассчитываем bmi (Инде
 water_needed = (user_weight * WATER_PER_KG) / ML_TO_LITRES
 
 # 4. Вывод красивого результата
-# Выводим имя, возраст, ИМТ (округленный до 1 знака) и норму воды.
+# Логика склонения возраста
+if user_age % 10 == 1 and user_age % 100 != 11:
+    age_word = "год"
+elif 2 <= user_age % 10 <= 4 and not (12 <= user_age % 100 <= 14):
+    age_word = "года"
+else:
+    age_word = "лет"
+today = datetime.datetime.today()  # Выводим сегодняшнуюю дату
 print()
-print(f"Отчёт для пользователя: {user_name} ({user_age} г.)")
+print(f"Отчёт для пользователя на {today:%d-%m-%Y}")
+print(f"{user_name} - {user_age} {age_word}.")
 print(f"Ваш индекс массы тела: {bmi:.1f}")
 print(f"Ваша рекомендуемая норма воды: {round(water_needed, 1)} л. в день")
 print()
